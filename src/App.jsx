@@ -1,20 +1,21 @@
+import React from "react";
 import { BrowserRouter } from "react-router-dom";
 
-import { 
-  About, 
-  Contact, 
-  Experience, 
-  Feedbacks, 
-  Hero, 
-  Navbar, 
-  Tech, 
-  Works, 
-  StarsCanvas 
+import {
+  About,
+  Contact,
+  Experience,
+  Feedbacks,
+  Hero,
+  Navbar,
+  Tech,
+  Works,
+  StarsCanvas,
 } from "./components";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/">
       <div className="relative z-0 bg-primary">
         {/* Hero Section */}
         <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
@@ -23,17 +24,19 @@ const App = () => {
         </div>
 
         {/* Main Sections */}
-        <About />
-        <Experience />
-        <Tech />
-        <Works />
-        <Feedbacks />
+        <main>
+          <About />
+          <Experience />
+          <Tech />
+          <Works />
+          <Feedbacks />
+        </main>
 
         {/* Contact + Stars */}
-        <div className="relative z-0">
+        <footer className="relative z-0">
           <Contact />
           <StarsCanvas />
-        </div>
+        </footer>
       </div>
     </BrowserRouter>
   );
