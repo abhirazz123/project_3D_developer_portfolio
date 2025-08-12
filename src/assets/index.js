@@ -1,10 +1,10 @@
+// UI & Icon Assets (stay in src/assets)
 import logo from "./logo.svg";
 import backend from "./backend.png";
 import creator from "./creator.png";
 import mobile from "./mobile.png";
 import web from "./web.png";
-
-import github from "./tech/github.png"; // fixed path
+import github from "./tech/github.png";
 import menu from "./menu.svg";
 import close from "./close.svg";
 
@@ -21,16 +21,17 @@ import spring from "./tech/spring.png";
 import springboot from "./tech/springboot.png";
 import python from "./tech/python.png";
 import opencv from "./tech/opencv.png";
-
 import mongodb from "./tech/mongodb.png";
 import nodejs from "./tech/nodejs.png";
 import reactjs from "./tech/reactjs.png";
 import redux from "./tech/redux.png";
 import tailwind from "./tech/tailwind.png";
 import threejs from "./tech/threejs.svg";
-
 import hostelms from "./tech/hostelms.png";
-import trafficcontrol from "./tech/trafficcontrol.png"; // fixed path
+import trafficcontrol from "./tech/trafficcontrol.png";
+
+// Public folder assets (no import — used via URL)
+const herobg = "/herobg.png"; // Move herobg.png to public folder
 
 export {
   logo,
@@ -62,4 +63,5 @@ export {
   threejs,
   hostelms,
   trafficcontrol,
+  herobg,
 };
