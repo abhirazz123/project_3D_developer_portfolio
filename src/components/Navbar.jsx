@@ -11,98 +11,88 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 100);
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      if (scrollTop > 100) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
     window.addEventListener("scroll", handleScroll);
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavClick = (title) => {
-    setActive(title);
-    setToggle(false);
-  };
-
   return (
     <nav
-      className={`${styles.paddingX} fixed top-0 w-full flex items-center py-5 z-30 transition-all duration-300 ease-in-out backdrop-blur-md bg-primary/30 ${
-        scrolled ? "shadow-lg border-b border-white/10" : "border-b border-transparent"
+      className={`${
+        styles.paddingX
+      } w-full flex items-center py-5 fixed top-0 z-20 ${
+        scrolled ? "bg-primary" : "bg-transparent"
       }`}
-      role="navigation"
-      aria-label="Primary"
     >
-      <div className="max-w-7xl w-full mx-auto flex justify-between items-center">
-        {/* Logo */}
+      <div className='w-full flex justify-between items-center max-w-7xl mx-auto'>
         <Link
-          to="/"
+          to='/'
+          className='flex items-center gap-2'
           onClick={() => {
             setActive("");
-            setToggle(false);
-            window.scrollTo({ top: 0, behavior: "smooth" });
+            window.scrollTo(0, 0);
           }}
-          className="flex items-center gap-2"
-          aria-label="Go to homepage"
         >
-          <img src={logo} alt="Logo" className="w-9 h-9 object-contain" />
-          <p className="text-white text-lg font-bold cursor-pointer select-none">
-            Abhishek Kumar{" "}
-            <span className="hidden sm:inline">| Java Full Stack Development</span>
+          <img src={logo} alt='logo' className='w-9 h-9 object-contain' />
+          <p className='text-white text-[18px] font-bold cursor-pointer flex '>
+            Adrian &nbsp;
+            <span className='sm:block hidden'> | JavaScript Mastery</span>
           </p>
         </Link>
 
-        {/* Desktop menu */}
-        <ul className="hidden sm:flex space-x-10">
-          {navLinks.map(({ id, title }) => (
-            <li key={id}>
-              <a
-                href={`#${id}`}
-                onClick={() => setActive(title)}
-                className={`text-base font-medium cursor-pointer ${
-                  active === title ? "text-white" : "text-gray-300"
-                } hover:text-white transition-colors duration-200`}
-                aria-current={active === title ? "page" : undefined}
-              >
-                {title}
-              </a>
+        <ul className='list-none hidden sm:flex flex-row gap-10'>
+          {navLinks.map((nav) => (
+            <li
+              key={nav.id}
+              className={`${
+                active === nav.title ? "text-white" : "text-secondary"
+              } hover:text-white text-[18px] font-medium cursor-pointer`}
+              onClick={() => setActive(nav.title)}
+            >
+              <a href={`#${nav.id}`}>{nav.title}</a>
             </li>
           ))}
         </ul>
 
-        {/* Mobile menu button */}
-        <button
-          onClick={() => setToggle((prev) => !prev)}
-          className="sm:hidden focus:outline-none"
-          aria-label={toggle ? "Close menu" : "Open menu"}
-          aria-expanded={toggle}
-        >
+        <div className='sm:hidden flex flex-1 justify-end items-center'>
           <img
             src={toggle ? close : menu}
-            alt="menu toggle icon"
-            className="w-7 h-7 object-contain"
+            alt='menu'
+            className='w-[28px] h-[28px] object-contain'
+            onClick={() => setToggle(!toggle)}
           />
-        </button>
 
-        {/* Mobile menu with animation */}
-        <div
-          className={`absolute top-20 right-4 w-44 rounded-xl p-6 flex flex-col space-y-4 shadow-lg sm:hidden backdrop-blur-md bg-primary/40 border border-white/10 transform transition-all duration-300 ease-in-out ${
-            toggle
-              ? "opacity-100 translate-y-0 scale-100"
-              : "opacity-0 -translate-y-4 scale-95 pointer-events-none"
-          }`}
-          role="menu"
-          aria-label="Mobile Navigation"
-        >
-          {navLinks.map(({ id, title }) => (
-            <a
-              key={id}
-              href={`#${id}`}
-              onClick={() => handleNavClick(title)}
-              className={`block text-base font-medium cursor-pointer ${
-                active === title ? "text-white" : "text-gray-300"
-              } hover:text-white transition-colors duration-200`}
-              role="menuitem"
-            >
-              {title}
-            </a>
-          ))}
+          <div
+            className={`${
+              !toggle ? "hidden" : "flex"
+            } p-6 black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}
+          >
+            <ul className='list-none flex justify-end items-start flex-1 flex-col gap-4'>
+              {navLinks.map((nav) => (
+                <li
+                  key={nav.id}
+                  className={`font-poppins font-medium cursor-pointer text-[16px] ${
+                    active === nav.title ? "text-white" : "text-secondary"
+                  }`}
+                  onClick={() => {
+                    setToggle(!toggle);
+                    setActive(nav.title);
+                  }}
+                >
+                  <a href={`#${nav.id}`}>{nav.title}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </nav>
